@@ -45,7 +45,7 @@ return [
              *
              */
             'credentials' => [
-                'file' => env('FIREBASE_CREDENTIALS', env('GOOGLE_APPLICATION_CREDENTIALS')),
+                'file' => env('GOOGLE_CLOUD_KEY_FILE', env('GOOGLE_APPLICATION_CREDENTIALS')),
 
                 /**
                  * If you want to prevent the auto discovery of credentials, set the
@@ -74,7 +74,7 @@ return [
                  * Please make sure that you use a full URL like, for example,
                  * https://my-project-id.firebaseio.com
                  */
-                'url' => env('FIREBASE_DATABASE_URL'),
+                'url' => env('GOOGLE_DATABASE_URL'),
 
             ],
 
@@ -109,7 +109,7 @@ return [
                  * override it here.
                  */
 
-                'default_bucket' => env('FIREBASE_STORAGE_DEFAULT_BUCKET'),
+                'default_bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET'),
 
             ],
 
