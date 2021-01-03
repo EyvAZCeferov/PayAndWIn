@@ -18,6 +18,7 @@
         "kreait/laravel-firebase": "^3.0",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "2.4",
         "livewire/livewire": "^1.0",
         "renatomarinho/laravel-page-speed": "^1.9",
         "superbalist/laravel-google-cloud-storage": "^2.2",

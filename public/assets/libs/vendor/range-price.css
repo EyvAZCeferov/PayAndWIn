@@ -23,7 +23,7 @@
 .jslider .jslider-label-to { left: auto; right: 0; }
 
 .jslider .jslider-value { font-size: 16px; white-space: nowrap; padding: 1px 2px 0; position: absolute; bottom: -25px; left: 20%; background: white; line-height: 12px; -moz-border-radius: 2px; -webkit-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;font-weight: 400;color: #80b435;}
-.jslider .jslider-value:before{content: "$";font:400 16px "Roboto Condensed";color:#80b435;margin-right:0px;}
+.jslider .jslider-value:before{content: "₼";font:400 16px "Roboto Condensed";color:#80b435;margin-right:0px;}
 .jslider .jslider-value-to { left: 80%; }
 
 .jslider .jslider-label small,

@@ -11,7 +11,7 @@
                     @endforeach
                     <div class="blog-post-image hover-images">
                         <a href="#" title="
-@if(app()->getLocale()=='az')
+                        @if(app()->getLocale()=='az')
                         {{$campaign->az_name}}
                         @elseif(app()->getLocale()=='en')
                         {{$campaign->en_name}}
@@ -19,7 +19,7 @@
                         {{$campaign->ru_name}}
                         @endif
                             "><img src="assets/images/ImgBlog/1.jpg" alt="
-@if(app()->getLocale()=='az')
+                            @if(app()->getLocale()=='az')
                             {{$campaign->az_name}}
                             @elseif(app()->getLocale()=='en')
                             {{$campaign->en_name}}

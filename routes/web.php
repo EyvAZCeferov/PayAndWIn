@@ -18,6 +18,7 @@ Route::group(['prefix' => '/'], function () {
         Route::livewire('/{id}/campaigns','campaigns-customer')->name('customerCampaigns');
         Route::livewire('/{id}/locations','locations-browse')->name('customerLocationsBrowse');
         Route::livewire('/{id}/campaigns/{slug}','campaigns-browse')->name('customerCampaignsBrowse');
+        Route::livewire('/{id}/products','products')->name('products');
         Route::livewire('/', 'customers')->name('customers');
     });
     Route::post('emailsender', 'BaseController@sendEmail')->name('emailsender');

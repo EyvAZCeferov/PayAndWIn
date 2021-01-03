@@ -62,6 +62,9 @@ return [
             'campaigns'=>[
                 'all'=>'Bütün mağazalar'
             ],
+            'products'=>[
+                'byPrice'=>'Qiymət ilə'
+            ],
         ],
     ],
     'standart' => [
@@ -105,6 +108,7 @@ return [
             'required'=>'Doldurmağınız önəmli!',
             'email'=>'E-mail tipində məlumat daxil edin.',
             'length'=>'Uzunluğu maksimal :len olmalıdır.',
+            'lengthMin'=>'Uzunluğu minimal :len olmalıdır.',
             'emailRecorded'=>'Emailiniz qeydə alındı.',
             'emailNotRecorded'=>'Emailiniz qeydə alınmadı. :err',
             'messageSended'=>'Məktub göndərildi.',
@@ -120,5 +124,9 @@ return [
         'addtocart' => 'Karta əlavə et',
         'more' => 'Daha çox',
         'shareThis' => 'Adreslərdə paylaş'
+    ],
+    'auth'=>[
+        'notyetacc'=>'Daxil etdiyiniz nömrəyə aid hesab görünmür.',
+        'error'=>'Xəta yarandı',
     ],
 ];

@@ -45,7 +45,7 @@ return [
              *
              */
             'credentials' => [
-                'file' => env('GOOGLE_CLOUD_KEY_FILE', env('GOOGLE_APPLICATION_CREDENTIALS')),
+                'file' => env('GOOGLE_CLOUD_KEY_FILE', env('GOOGLE_CLOUD_KEY_FILE')),
 
                 /**
                  * If you want to prevent the auto discovery of credentials, set the
