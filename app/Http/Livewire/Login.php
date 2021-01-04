@@ -3,64 +3,106 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Kreait\Firebase\Factory;
+use Nexmo;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class Login extends Component
 {
-    public $formFields=[
-        'login'=>[
-            'phoneNumb'=>null,
-            'password'=>null,
-            'remember'=>'on',
+    public $formFields = [
+        'login' => [
+            'phoneNumb' => null,
+            'password' => null,
+            'remember' => 'on',
         ],
-        'register'=>[
-            'phoneNumb'=>null,
+        'register' => [
+            'phoneNumb' => null,
+            'password' => null,
         ],
-        'forgetPass'=>[
-            'phoneNumb'=>null,
+        'forgetPass' => [
+            'phoneNumb' => null,
         ],
-    ];
+        'verify'=>[
+            'verifyCode'=>null,
+            'nexmo_request_id'=>null,
+        ],
+    ],$modal=false;
 
-    public function login(){
-        try{
-            $factoryAuth = (new Factory)->withServiceAccount(app_path() . '/Firebase/FirebaseConfig.json')->createAuth();
-            $factoryDB = (new Factory)->withServiceAccount(app_path() . '/Firebase/FirebaseConfig.json')->createDatabase();
+    public function login()
+    {
+        try {
             $this->validate([
                 'formFields.login.phoneNumb' => 'required|max:50',
-                'formFields.login.password' => 'required|max:300',
+                'formFields.login.password' => 'required|max:50',
                 'formFields.login.remember' => 'required|max:10',
-            ],[
-                'formFields.login.phoneNumb.required'=>\Lang::get('static.form.validation.required'),
-                'formFields.login.password.required'=>\Lang::get('static.form.validation.required'),
-                'formFields.login.phoneNumb.max'=>\Lang::get('static.form.validation.length',['len'=>50]),
-                'formFields.login.password.min'=>\Lang::get('static.form.validation.lengthMin',['len'=>8]),
-            ]);
-            $userDat = $factoryDB->getReference('users/');
-            $userDatas = $userDat->getValue();
-            if($userDatas){
-                foreach($userDatas as $userData){
-                    if($userData['userInfos']['phoneNumb']==$this->formFields->login->phoneNumb){
-                        $factoryAuth->getUserByPhoneNumber($this->formFields->login->phoneNumb);
-                    }else{
-                        session()->flash('message', \Lang::get('static.auth.notyetacc'));
-                    }
-                }
+            ], [
+                'formFields.login.phoneNumb.required' => \Lang::get('static.form.validation.required'),
+                'formFields.login.password.required' => \Lang::get('static.form.validation.required'),
+                'formFields.login.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
+                'formFields.login.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
+                'formFields.login.password.min' => \Lang::get('static.form.validation.lengthMin', ['len' => 8]),
+            ]);            
+            $user=User::where('phoneNumber',$this->formFields['register']['phoneNumb'])->first();
+            Auth::login($user,true);
+            $user=Auth::user();
+            if($user){
+                session()->flash('message', \Lang::get('static.auth.successLogin'));
             }
-        }catch(\Exception $e){
-            session()->flash('message', \Lang::get('static.auth.error').' '.$e->getMessage());
+            return redirect('/');
+        } catch (\Exception $e) {
+            session()->flash('message', \Lang::get('static.auth.error') . ' ' . $e->getMessage());
         }
     }
 
-    public function register(){
+    public function register()
+    {
         $this->validate([
             'formFields.register.phoneNumb' => 'required|max:50',
-        ],[
-            'formFields.register.phoneNumb.required'=>\Lang::get('static.form.validation.required'),
-            'formFields.register.phoneNumb.max'=>\Lang::get('static.form.validation.length',['len'=>50]),
+            'formFields.register.password' => 'required|max:50',
+        ], [
+            'formFields.register.phoneNumb.required' => \Lang::get('static.form.validation.required'),
+            'formFields.register.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
+            'formFields.register.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
+            'formFields.register.password.required' => \Lang::get('static.form.validation.required'),
+            'formFields.register.password.min' => \Lang::get('static.form.validation.lengthMin', ['len' => 8]),
         ]);
-        Auth::loginWithEmail('getdata@pw.az','payandwin123');
+        $verification=Nexmo::verify()->start([
+            'number'=>$this->formFields['register']['phoneNumb'],
+            'brand'  => 'Pay And Win',
+            'code_length'  => '4'
+        ]);
+        $this->modal=true;
+        $this->formFields['verify']['nexmo_request_id']=$verification->getRequestId();
     }
 
+    public function closeModal(){
+        $this->modal=false;
+    }
+
+    public function verify(){        
+        try{
+            $verification = new \Nexmo\Verify\Verification($this->formFields['verify']['nexmo_request_id']);
+            Nexmo::verify()->check($verification, $this->formFields['verify']['verifyCode']);
+            User::create([
+                'profilePhoto'=>null,
+                'role'=>0,
+                'customer_id'=>0,
+                'name'=>'Name',
+                'email'=>null,
+                'phoneNumber'=>$this->formFields['register']['phoneNumb'],
+                'password'=>Hash::make($this->formFields['register']['password']),
+                'uid'=>Str::random(40),
+            ]);
+            Auth::attempt(['phoneNumber' => $this->formFields['register']['phoneNumb'], 'password' => Hash::make($this->formFields['register']['password'])]);
+            session()->flash('message', 'Basarili');
+            $this->modal=false;
+            return redirect('/');
+        }catch(\Exception $e){
+            session()->flash('message', \Lang::get('static.auth.error') . ' ' . $e->getMessage());
+        }
+    }
 
     public function render()
     {

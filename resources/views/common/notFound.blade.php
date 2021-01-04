@@ -22,15 +22,17 @@
                                                     title="@lang('static.menu.index')">@lang('static.menu.index')
                         <i
                             class="fa fa-angle-double-right"></i></a></p>
-                <form action="#" method="get" accept-charset="utf-8">
+                <form action="{{ route('search') }}" method="POST">
+                    @csrf
                     <input type="text"
                            onblur="if (this.value == '') {this.value = @lang('static.standart.topPanel.searchPlaceholder');}"
                            onfocus="if(this.value != '') {this.value = '';}"
                            value="@lang('static.standart.topPanel.searchPlaceholder')"
                            class="input-text required-entry"
                            title="@lang('static.standart.topPanel.searchPlaceholder')"
-                           id="newsletter" name="email">
-                    <button class="button" title="@lang('static.standart.topPanel.search')"
+                           id="newsletter" name="keyword"
+                           required />
+                    <button class="submit" title="@lang('static.standart.topPanel.search')"
                             type="submit">@lang('static.standart.topPanel.search')</button>
                 </form>
             </div>

@@ -21,14 +21,32 @@ return [
         'campaigns' => 'Kampaniyalar',
         'customers' => 'Müştərilər',
         'search'=>'Axtarış nəticəsi',
+        'shopping'=>[
+            'wishlists'=>'İstək listi',
+            'cartlists'=>'Alış-veriş listi',
+            'checkout'=>'Ödəniş',
+            'ordersuccess'=>'Ödəniş tamamlandı',
+            'trackProduct'=>'Məhsulu izlə'
+        ],
     ],
     'page' => [
+        'index'=>[
+            'weArePW'=>'Biz Pay And Win ik!',
+            'showCartList'=>'Siyahı'
+        ],
         'loginRegister' => [
             'login' => [
                 'desc' => 'Xoş gəlmişsiniz! Daxil olun!',
             ],
             'register' => [
                 'desc' => 'PW hesabını yarat!',
+                'form'=>[
+                    'setPassword'=>'Giriş şifrəsi təyin et',
+                ],
+            ],
+            'verify'=>[
+                'verifyInput'=>'Təsdiq kodunu daxil edin',
+                'verify'=>'Təsdiqlə'
             ],
         ],
         '404' => [
@@ -64,6 +82,53 @@ return [
             ],
             'products'=>[
                 'byPrice'=>'Qiymət ilə'
+            ],
+        ],
+        'shopping'=>[
+            'wishlist'=>[
+                'tableheader'=>[
+                    'productName'=>'Məhsul',
+                    'price'=>'Qiymət',
+                    'stockstat'=>[
+                        'title'=>'Stok statutusu',
+                        'inStock'=>'Stok da',
+                        'outStock'=>'Qurtarıb',
+                    ],
+                    'addToCart'=>'Karta əlavə et'
+                ],
+            ],
+            'cartlist'=>[
+                'tableheader'=>[
+                    'total'=>'Ümumi',
+                    'qyt'=>'Miqdar',
+                ],
+                'other'=>[
+                    'subtotal'=>'Yekun',
+                    'clearCart'=>'Kartı sıfırla',
+                    'updateCart'=>'Kartı yenilə',
+                    'continueCart'=>'Ödəməyə davam et',
+                ],
+            ],
+            'checkout'=>[
+                'other'=>[
+                    'endShopping'=>'Ödənişi təsdiqlə',
+                    'cupponCode'=>'Kupon kodu',
+                ],
+                'order'=>[
+                    'yourOrder'=>'Sizin sifariş',
+                ],
+            ],
+            'order'=>[
+                'other'=>[
+                    'describe'=>'Ödənişiniz üçün təşəkkürlər :)'
+                ],
+            ],
+            'track'=>[
+                'other'=>[
+                    'describe'=>'Sifariş "İD"-nizi daxil edin.',
+                    'orderId'=>'Sifariş İD',
+                    'track'=>'İzlə',
+                ],
             ],
         ],
     ],
@@ -128,5 +193,6 @@ return [
     'auth'=>[
         'notyetacc'=>'Daxil etdiyiniz nömrəyə aid hesab görünmür.',
         'error'=>'Xəta yarandı',
+        'successLogin'=>'Daxil oldunuz',
     ],
 ];

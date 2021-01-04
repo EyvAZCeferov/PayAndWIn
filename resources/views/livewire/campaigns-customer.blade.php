@@ -27,12 +27,12 @@
                                 src="data:image/png;base64,{{get_image($images[0],'posts',$campaign->clasor)}}"
                                 alt="
                                 @if(app()->getLocale()=='az')
-                                                        {{ $campaign->az_name }}
-                                                    @elseif(app()->getLocale()=='en')
-                                                        {{ $campaign->en_name }}
-                                                    @elseif(app()->getLocale()=='ru')
-                                                        {{ $campaign->ru_name }}
-                                                    @endif
+                                    {{ $campaign->az_name }}
+                                @elseif(app()->getLocale()=='en')
+                                    {{ $campaign->en_name }}
+                                @elseif(app()->getLocale()=='ru')
+                                    {{ $campaign->ru_name }}
+                                @endif
                                 " /></a>
                         </div>
                         <div class="text">

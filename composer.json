@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "bumbummen99/shoppingcart": "^3.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
@@ -20,6 +21,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "2.4",
         "livewire/livewire": "^1.0",
+        "nexmo/client": "^2.4",
+        "nexmo/laravel": "^2.4",
         "renatomarinho/laravel-page-speed": "^1.9",
         "superbalist/laravel-google-cloud-storage": "^2.2",
         "yoeunes/toastr": "^1.2"

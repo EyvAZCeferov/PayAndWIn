@@ -4,8 +4,8 @@ use App\Http\Controllers\BaseController;
 
 
 Route::group(['prefix' => '/'], function () {
+    Route::livewire('/', 'index')->name('index');
     Route::livewire('login', 'login')->name('login')->middleware('guest');
-    Route::livewire('index', 'index')->name('index');
     Route::livewire('contactus', 'contactus')->name('contactus');
     Route::livewire('aboutus', 'aboutus')->name('aboutus');
     Route::livewire('faq', 'faq')->name('faq');
@@ -21,9 +21,18 @@ Route::group(['prefix' => '/'], function () {
         Route::livewire('/{id}/products','products')->name('products');
         Route::livewire('/', 'customers')->name('customers');
     });
+    Route::group(['prefix' => 'shopping'], function () {
+        Route::livewire('wishlist', 'wishlists')->name('wishlist');
+        Route::livewire('cartlist','cartlist')->name('cartlist');
+        Route::livewire('checkout','checkout')->name('checkout');
+        Route::livewire('ordersuccess','ordersuccess')->name('ordersuccess');
+        Route::livewire('track','track')->name('track');
+    });
     Route::post('emailsender', 'BaseController@sendEmail')->name('emailsender');
     Route::post('search', 'BaseController@search')->name('search');
     Route::get('share/{platform}/{table}/{content_id}', 'BaseController@share')->name('share');
 });
 
 Route::fallback([BaseController::class, 'notFound']);
+
+Route::get('/home', 'HomeController@index')->name('home');

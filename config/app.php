@@ -182,7 +182,8 @@ return [
         Kreait\Laravel\Firebase\ServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
-
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Nexmo\Laravel\NexmoServiceProvider::class,
 
     ],
 
@@ -239,6 +240,8 @@ return [
         // Aliases
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
 
 
     ],

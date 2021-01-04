@@ -99,7 +99,7 @@
                                 <img
                                     width="60"
                                     src="data:image/png;base64,{{get_image($item->icon,'about/whychooseus/items')}}"
-                                    alt="{{$item->icon}}">
+                                    alt="{{$item->icon}}" />
                             </div>
                             <div class="text">
                                 <h3>

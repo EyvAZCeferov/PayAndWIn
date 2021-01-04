@@ -22,30 +22,24 @@
             height: 3px;
             background-color: #7c9d32;
         }
-
         .svg-inline--fa.fa-plus.fa-w-14 {
             display: none;
             overflow: hidden;
         }
-
         body::-webkit-scrollbar {
             width: 0.6em;
         }
-
         body::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px #fff;
         }
-
         body::-webkit-scrollbar-thumb {
             background-color: #7c9d32;
             outline: 1px solid #ffffff;
             border-radius: 5px
         }
-
         body::-webkit-scrollbar-corner {
             border-radius: 5px
         }
-
     </style>
     @livewireStyles
 
@@ -68,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal fade searchModal" tabindex="8" role="dialog" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content popup-search">
                 <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>
@@ -142,37 +136,45 @@
                                     <ul class="list">
                                         <li>
                                             <a href="#" title="" class="cart-product-image"><img
-                                                    src="assets/images/products/1.jpg" alt="Product"></a>
+                                                    src="{{ asset('assets/libs/images/products/1.jpg') }}" alt="Product"></a>
                                             <div class="text">
                                                 <p class="product-name">Union Bed</p>
                                                 <p class="product-price"><span class="price-old">$700.00</span><span
                                                         class="price">$350.00</span></p>
-                                                <p class="qty">QTY:01</p>
+                                                <p class="@lang('static.page.shopping.cartlist.tableheader.qyt')">@lang('static.page.shopping.cartlist.tableheader.qyt'):01</p>
                                             </div>
                                             <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
                                         </li>
                                         <li>
                                             <a href="#" title="" class="cart-product-image"><img
-                                                    src="assets/images/products/1.jpg" alt="Product"></a>
+                                                    src="{{ asset('assets/libs/images/products/1.jpg') }}" alt="Product"></a>
                                             <div class="text">
                                                 <p class="product-name">Union Bed</p>
                                                 <p class="product-price"><span class="price-old">$700.00</span><span
                                                         class="price">$350.00</span></p>
-                                                <p class="qty">QTY:01</p>
+                                                <p class="@lang('static.page.shopping.cartlist.tableheader.qyt')">@lang('static.page.shopping.cartlist.tableheader.qyt'):01</p>
                                             </div>
-                                            <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
+                                            <a class="close" href="javascript:void(0)" title="close"><i class="fa fa-times-circle"></i></a>
                                         </li>
                                     </ul>
-                                    <p class="total"><span class="left">Total:</span> <span class="right">$1121.98</span>
+                                    <p class="total"><span class="left">@lang('static.page.shopping.cartlist.tableheader.total'):</span> <span class="right">$1121.98</span>
                                     </p>
                                     <div class="bottom">
-                                        <a class="link-v1" href="#" title="viewcart">View Cart</a>
-                                        <a class="link-v1 rt" href="#" title="checkout">Check out</a>
+                                        <a class="link-v1" href="{{ route('cartlist') }}" title="@lang('static.page.index.showCartList')">@lang('static.page.index.showCartList')</a>
+                                        <a class="link-v1 rt" href="{{ route('checkout') }}" title="@lang('static.menu.shopping.checkout')">@lang('static.menu.shopping.checkout')</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+                            <div class="search dropdown" data-toggle="modal" data-target=".searchModal">
                                 <i class="icon"></i>
+                            </div>
+                            <div class="cart ">
+                                <p class="icon-cart">
+                                    <a href="{{ route('wishlist') }}">
+                                        <i class="far text-gray fa-heart fa-2x"></i>
+                                    </a>
+                                    <span class="cart-count">2</span>
+                                </p>
                             </div>
                         </div>
                         <nav class="mega-menu">

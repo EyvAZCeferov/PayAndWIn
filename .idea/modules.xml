@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../adminPanels/MyPanel/Panel/panel/.idea/panel.iml" filepath="$PROJECT_DIR$/../../adminPanels/MyPanel/Panel/panel/.idea/panel.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/payandwin.iml" filepath="$PROJECT_DIR$/.idea/payandwin.iml" />
     </modules>
   </component>
