@@ -28,6 +28,11 @@ return [
             'ordersuccess'=>'Ödəniş tamamlandı',
             'trackProduct'=>'Məhsulu izlə'
         ],
+        'profile'=>[
+            'index'=>':name Hesabı',
+            'cards'=>':name kartları',
+            'payed'=>':name ödənişlər',
+        ],
     ],
     'page' => [
         'index'=>[
@@ -131,6 +136,31 @@ return [
                 ],
             ],
         ],
+        'profile'=>[
+            'tabs'=>[
+                'dashboard'=>'İdarə paneli',
+                'cards'=>'Kartlar',
+                'payed'=>'Ödənişlər'
+            ],
+            'table'=>[
+                'columns'=>[
+                    'icon'=>'İkon',
+                    'number'=>'Kart nömrəsi',
+                    'expirationDate'=>'Bitmə tarixi',
+                    'remove'=>'Sil',
+                    'money'=>'Məbləğ',
+                ],
+            ],
+            'addCart'=>[
+                'columns'=>[
+                    'nameAndSurname'=>'Ad Soyad',
+                    'cardholderName'=>'Kart sahibi adı',
+                    'securityCode'=>'Güvənlik şifrəsi',
+                    'generate'=>'Nümunə göstər',
+                    'cartPass'=>'Kartın şifrəsi'
+                ],
+            ],
+        ],
     ],
     'standart' => [
         'topPanel' => [
@@ -167,7 +197,8 @@ return [
             'submit' => 'Abunə ol',
             'sendmessage' => 'Məktubu göndər',
             'shareComment'=>'Şərhi Bölüş',
-            'reply'=>'Cavabla'
+            'reply'=>'Cavabla',
+            'add'=>'Əlavə et'
         ],
         'validation'=>[
             'required'=>'Doldurmağınız önəmli!',
@@ -183,6 +214,10 @@ return [
             'ratingSended'=>'Reytinqiniz göndərildi.',
             'ratingNotSended'=>'Reytinqiniz göndərilmədi.',
             'searchFailed'=>'Axtarış nəticəsi tapılmadı.',
+        ],
+        'action'=>[
+            'removed'=>'Silindi',
+            'added'=>'Əlavə edildi'
         ],
     ],
     'actions' => [

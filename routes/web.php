@@ -28,11 +28,19 @@ Route::group(['prefix' => '/'], function () {
         Route::livewire('ordersuccess','ordersuccess')->name('ordersuccess');
         Route::livewire('track','track')->name('track');
     });
+    Route::group(['prefix' => 'profile','middleware'=>'auth'], function () {
+        Route::livewire('/','profile')->name('profile');
+        Route::livewire('/cards','profile-cards')->name('profile-cards');
+        Route::livewire('/payed','profile-payed')->name('profile-payed');
+    });
     Route::post('emailsender', 'BaseController@sendEmail')->name('emailsender');
     Route::post('search', 'BaseController@search')->name('search');
     Route::get('share/{platform}/{table}/{content_id}', 'BaseController@share')->name('share');
 });
 
+Route::group(['prefix' => 'functions'], function () {
+    Route::post('cartadd','FunctionController@cartadd')->name('cartadd');
+});
+
 Route::fallback([BaseController::class, 'notFound']);
 
-Route::get('/home', 'HomeController@index')->name('home');

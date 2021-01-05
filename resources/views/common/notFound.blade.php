@@ -2,13 +2,6 @@
 @section('title')
     @lang('static.menu.404')
 @endsection
-@section('css')
-    @toastr_css
-@endsection
-@section('js')
-    @toastr_js
-    @toastr_render
-@endsection
 @section('content')
     <div class="container">
         <div class="page-404">

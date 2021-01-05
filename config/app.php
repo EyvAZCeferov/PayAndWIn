@@ -243,7 +243,6 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
 
-
     ],
 
 ];

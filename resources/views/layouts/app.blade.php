@@ -44,6 +44,7 @@
     @livewireStyles
 
     @livewireScripts
+    @toastr_css
 
     @yield('css')
     <title>@yield('title')</title>
@@ -97,7 +98,7 @@
                         </div>
                         <div class="float-right align-right">
                             @if(auth()->check())
-                                <a class="acc" href="#">
+                                <a class="acc" href="{{ route('profile') }}">
                                     <i class="fa fa-user"></i>
                                     @lang('static.menu.account')
                                 </a>
@@ -385,6 +386,8 @@
 <script type="text/javascript" src="{{asset('assets/libs/js/jquery.zoom.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/libs/js/store.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/libs/vendor/fontawesome/js/all.min.js')}}"></script>
+@toastr_js
+@toastr_render
 @yield('js')
 
 </body>

@@ -3,7 +3,7 @@
 @endsection
 @section('homeActive', 'active')
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/vendor/owl-slider.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/vendor/owl-slider.css') }}"/>
 <script>
     $(function(){
         $('#topSubject').hide();
