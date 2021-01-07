@@ -3,12 +3,11 @@
 @endsection
 @section('contactActive', 'active')
 @section('css')
-<script>
-
-    $(function(){
-        $('#topSubject').hide();
-    })
-</script>
+    <script>
+        $(function(){
+            $('#topSubject').hide();
+        })
+    </script>
 <style type="text/css">
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
@@ -100,7 +99,7 @@
                         <strong>{{session('message')}}</strong>
                     </div>
                 @endif
-                <form class="form-horizontal space-50" wire:submit.prevent="sendMessage">
+                <form class="submitable" class="form-horizontal space-50" wire:submit.prevent="sendMessage">
                     <div class="form-group col-md-6">
                         <input type="text" placeholder="@lang('static.form.labels.name')*"
                                class="form-control" wire:model="formFields.name"/>
@@ -126,7 +125,14 @@
                                             class="text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="box align-left">
-                        <button type="submit" class="link-v1 rt">@lang('static.form.buttons.sendmessage')</button>
+                        <button
+                            type="submit"
+                            class="link-v1 rt"
+                            class="g-recaptcha"
+                            data-sitekey="reCAPTCHA_site_key"
+                            data-callback='onSubmit'
+                            data-action='submit'
+                          >@lang('static.form.buttons.sendmessage')</button>
                     </div>
                 </form>
             </div>

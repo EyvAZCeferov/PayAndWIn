@@ -32,6 +32,10 @@ Route::group(['prefix' => '/'], function () {
         Route::livewire('/','profile')->name('profile');
         Route::livewire('/cards','profile-cards')->name('profile-cards');
         Route::livewire('/payed','profile-payed')->name('profile-payed');
+        Route::livewire('/settings','profile-settings')->name('profile-settings');
+        Route::livewire('/pininfo','pininfo')->name('pininfo');
+        Route::livewire('/payinfo/{id}','payed-product-info')->name('payed-product-info');
+        Route::get('/logout','FunctionController@logout')->name('logout');
     });
     Route::post('emailsender', 'BaseController@sendEmail')->name('emailsender');
     Route::post('search', 'BaseController@search')->name('search');

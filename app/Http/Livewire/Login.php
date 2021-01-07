@@ -43,14 +43,22 @@ class Login extends Component
                 'formFields.login.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
                 'formFields.login.phoneNumb.max' => \Lang::get('static.form.validation.length', ['len' => 50]),
                 'formFields.login.password.min' => \Lang::get('static.form.validation.lengthMin', ['len' => 8]),
-            ]);            
-            $user=User::where('phoneNumber',$this->formFields['register']['phoneNumb'])->first();
-            Auth::login($user,true);
-            $user=Auth::user();
-            if($user){
-                session()->flash('message', \Lang::get('static.auth.successLogin'));
+            ]);
+            $user=User::where('phoneNumber',$this->formFields['login']['phoneNumb'])->first();
+            $verify=Hash::check($this->formFields['login']['password'], $user->password);
+            // $verify=true;
+            if($verify){
+                Auth::loginUsingId($user->id);
+                $user=Auth::user();
+                if($user){
+                    session()->flash('message', \Lang::get('static.auth.successLogin'));
+                    return redirect()->route('profile');
+                }else{
+                    session()->flash('message','Error '.$user);
+                }
+            }else{
+                session()->flash('message','Daxil etdiyiniz şifrə yanlışdır.');
             }
-            return redirect('/');
         } catch (\Exception $e) {
             session()->flash('message', \Lang::get('static.auth.error') . ' ' . $e->getMessage());
         }
@@ -81,7 +89,7 @@ class Login extends Component
         $this->modal=false;
     }
 
-    public function verify(){        
+    public function verify(){
         try{
             $verification = new \Nexmo\Verify\Verification($this->formFields['verify']['nexmo_request_id']);
             Nexmo::verify()->check($verification, $this->formFields['verify']['verifyCode']);
@@ -95,7 +103,10 @@ class Login extends Component
                 'password'=>Hash::make($this->formFields['register']['password']),
                 'uid'=>Str::random(40),
             ]);
-            Auth::attempt(['phoneNumber' => $this->formFields['register']['phoneNumb'], 'password' => Hash::make($this->formFields['register']['password'])]);
+            Auth::attempt([
+                'phoneNumber' => $this->formFields['register']['phoneNumb'],
+                'password' => Hash::make($this->formFields['register']['password'])
+            ]);
             session()->flash('message', 'Basarili');
             $this->modal=false;
             return redirect('/');

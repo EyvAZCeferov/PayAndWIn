@@ -19,7 +19,34 @@ class ProfileCards extends Component
 
     public function mount(){
         $this->cardsLists=  UserCards::where('uid',Auth::user()->uid)->get();
-        // dd($this->cardsLists[0]['cardInfos']);
+        $this->checkPin();
+    }
+
+    public function checkPin(){
+        $pin=UserCards::where('uid',Auth::user()->uid)->where('type','pin')->first();
+        if(!$pin || $pin->count()==0 || $pin==null){
+            $number=$this->makePinNumb();
+            $cardInfo=[
+                'number'=>$number,
+                'cvc'=>rand(101,999),
+                'type'=>'pin',
+                'expiry'=>'∞/∞',
+                'password'=>null,
+                'price'=>0,
+            ];
+            UserCards::create([
+                'uid'=>Auth::user()->uid,
+                'cardId'=>Str::random(15),
+                'cardInfos'=>json_encode($cardInfo),
+                'type'=>'pin',
+            ]);
+        }
+    }
+
+    public function makePinNumb(){
+        $code = '111';
+        for($i = 0; $i < 13; $i++) { $code .= mt_rand(0, 9); }
+        return $code;
     }
 
     public function delete($cardId){
@@ -31,7 +58,11 @@ class ProfileCards extends Component
         }
         $this->mount();
     }
-   
+
+    public function pininfo(){
+        return redirect()->route('pininfo');
+    }
+
     public function render()
     {
         return view('livewire.profile-cards');

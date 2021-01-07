@@ -117,6 +117,10 @@
                 </div>
             @endif
             <div class="box">
+                @auth()
+                    <input type="hidden" value="{{ auth()->user()->name }}" wire:model="formFields.name" />
+                    <input type="hidden" value="{{ auth()->user()->email }}" wire:model="formFields.email" />
+                @else
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class=" control-label" aria-required="true" for="inputName">@lang('static.form.labels.name') *</label>
@@ -136,6 +140,8 @@
                                 class="text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
+                @endauth
+
             </div>
             <div class="form-group">
                 <label class=" control-label" aria-required="true" for="inputReview">@lang('static.form.labels.desc') <span class="color">*</span></label>

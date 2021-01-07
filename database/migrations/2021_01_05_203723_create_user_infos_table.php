@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersPayingsTable extends Migration
+class CreateUserInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateUsersPayingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_payings', function (Blueprint $table) {
+        Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
-            $table->text('pay_id');
             $table->text('uid');
-            $table->longText('payInfo');
+            $table->longText('infos')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateUsersPayingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_payings');
+        Schema::dropIfExists('user_infos');
     }
 }

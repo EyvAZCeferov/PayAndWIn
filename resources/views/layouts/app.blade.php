@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/vendor/settings.css')}}"/>
     <link rel="shortcut icon" href="{{asset('assets/logos/favicon.png')}}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
@@ -41,10 +42,31 @@
             border-radius: 5px
         }
     </style>
-    @livewireStyles
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
+    <script type="text/javascript">
+        function callbackThen(response){
+            // read HTTP status
+            console.log('Recaptcha ilə qorunursunuz :-) ');
+
+            // read Promise object
+            response.json().then(function(data){
+                console.log(data);
+            });
+        }
+        function callbackCatch(error){
+            console.error('Error:', error)
+        }
+    </script>
+
+    @livewireStyles
     @livewireScripts
     @toastr_css
+
+    {!! htmlScriptTagJsApi([
+        'callback_then' => 'callbackThen',
+        'callback_catch' => 'callbackCatch'
+    ]) !!}
 
     @yield('css')
     <title>@yield('title')</title>
@@ -68,7 +90,7 @@
             <div class="modal-content popup-search">
                 <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>
                 </button>
-                <form action="{{ route('search') }}" method="POST" >
+                <form class="submitable" action="{{ route('search') }}" method="POST" >
                     @csrf
                     <div class="modal-body">
                         <div class="input-group">
@@ -299,7 +321,9 @@
                             <h3 class="title-footer">@lang('static.standart.bottomPanel.getNews')</h3>
                             <p>@lang('static.standart.bottomPanel.updateInMinute')</p>
                             <div class="subscribe">
-                                <form action="{{ route('emailsender') }}" method="post" accept-charset="utf-8">
+                                <form class="submitable"
+                                 action="{{ route('emailsender') }}"
+                                  method="post" accept-charset="utf-8">
                                     @csrf
                                     <input type="text"
                                         onblur="if (this.value == '') {this.value = '@lang('static.form.inputs.inputemail')';}"
@@ -386,6 +410,11 @@
 <script type="text/javascript" src="{{asset('assets/libs/js/jquery.zoom.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/libs/js/store.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/libs/vendor/fontawesome/js/all.min.js')}}"></script>
+<script>
+    function onSubmit(token) {
+        document.getElementsByClassName("submitable").submit();
+    }
+</script>
 @toastr_js
 @toastr_render
 @yield('js')

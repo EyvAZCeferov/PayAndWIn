@@ -10,7 +10,7 @@
     <div class="categories-home3">
         <h3>
             @if(auth()->user()->profilePhoto || auth()->user()->profilePhoto!=null)
-                <img src="{{ get_image(auth()->user()->profilePhoto,'admins') }}" class="d-inline-block img-thumbnail" alt="{{ auth()->user()->name }}" />
+                <img width="80" height="60" src="data:image/png;base64,{{ get_image_from_google(auth()->user()->profilePhoto,'users') }}" class="d-inline-block img-circle" alt="{{ auth()->user()->name }}" />
             @endif
             {{ auth()->user()->name }}
         </h3>
@@ -35,6 +35,20 @@
                 &nbsp;&nbsp;
                 <a href="{{ route('profile-payed') }}" title="@lang('static.page.profile.tabs.payed')">
                     @lang('static.page.profile.tabs.payed')
+                </a>
+            </li>
+            <li class="{{ $settings }}">
+                <i class="fa fa-cog"></i>
+                &nbsp;&nbsp;
+                <a href="{{ route('profile-settings') }}" title="@lang('static.page.profile.tabs.settings')">
+                    @lang('static.page.profile.tabs.settings')
+                </a>
+            </li>
+            <li>
+                <i class="fas fa-sign-out-alt"></i>
+                &nbsp;&nbsp;
+                <a href="{{ route('logout') }}" title="@lang('static.page.profile.tabs.logout')">
+                    @lang('static.page.profile.tabs.logout')
                 </a>
             </li>
         </ul>

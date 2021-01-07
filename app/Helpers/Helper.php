@@ -4,6 +4,7 @@ use App\Models\Settings;
 use App\Models\Customers;
 use App\Models\UserCards;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 function settings($fieldname)
 {
@@ -39,9 +40,6 @@ function get_customers(){
 function get_cart_type($cardId){
     $card=UserCards::where('uid',Auth::user()->uid)->where('cardId',$cardId)->first();
     switch ($card->type) {
-        case 'pin':
-            return '<img src="{{ asset("assets/forsite/pin/pin.jpeg") }}" alt="Pin" />';
-            break;
         case 'bonuse':
             return '<i class="fas fa-award"></i>';
             break;
@@ -53,4 +51,18 @@ function get_cart_type($cardId){
 
 function ccMasking($number, $maskingCharacter = '*') {
     return substr($number, 0, 4) . str_repeat($maskingCharacter, strlen($number) - 8) . substr($number, -4);
+}
+
+function get_image_from_google($imageName,$clasor=null){
+     $imageUrl= Storage::disk('gcs')->url($clasor.'/'.$imageName);
+     if($imageUrl){
+        $file= base64_encode(file_get_contents($imageUrl));
+        if($file){
+            return $file;
+        }else{
+            return null;
+        }
+    }else{
+        return null;
+    }
 }

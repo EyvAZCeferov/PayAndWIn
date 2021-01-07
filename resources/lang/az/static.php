@@ -32,6 +32,8 @@ return [
             'index'=>':name Hesabı',
             'cards'=>':name kartları',
             'payed'=>':name ödənişlər',
+            'settings'=>':name sazlamalar',
+            'pininfo'=>':name pinlər'
         ],
     ],
     'page' => [
@@ -140,7 +142,9 @@ return [
             'tabs'=>[
                 'dashboard'=>'İdarə paneli',
                 'cards'=>'Kartlar',
-                'payed'=>'Ödənişlər'
+                'payed'=>'Ödənişlər',
+                'settings'=>'Sazlamalar',
+                'logout'=>'Çıxış et',
             ],
             'table'=>[
                 'columns'=>[
@@ -149,6 +153,21 @@ return [
                     'expirationDate'=>'Bitmə tarixi',
                     'remove'=>'Sil',
                     'money'=>'Məbləğ',
+                    'market'=>'Market',
+                    'payedCart'=>'Ödənilmiş kart',
+                    'edvreturn'=>'Ədv geri al',
+                    'buttons'=>'Düymələr'
+                ],
+            ],
+            'settings'=>[
+                'form'=>[
+                    'labels'=>[
+                        'profilePicture'=>'Şəkil seç',
+                        'birthday'=>'Doğum tarixi',
+                    ],
+                    'buttons'=>[
+                        'savechanges'=>'Yadda saxla'
+                    ],
                 ],
             ],
             'addCart'=>[
@@ -158,6 +177,28 @@ return [
                     'securityCode'=>'Güvənlik şifrəsi',
                     'generate'=>'Nümunə göstər',
                     'cartPass'=>'Kartın şifrəsi'
+                ],
+            ],
+            'pininfo'=>[
+                'headers'=>[
+                    'pins'=>'Pinlərim',
+                    'justPins'=>'Hazırki pinlərim :count',
+                    'pinpaying'=>'Pinlə ödə',
+                    'bonushistory'=>'Bonus tarixçəsi',
+                    'payinghistory'=>'Ödəniş tarixçəsi',
+                    'nullhistory'=>'Tarixçə boşdur',
+                ],
+                'table'=>[
+                    'organization'=>'Qurum',
+                    'date'=>'Tarix',
+                    'bonus'=>'Bonus',
+                    'description'=>'Açıqlama',
+                    'location'=>'Məkan',
+                    'contact'=>'Əlaqə',
+                    'pin'=>'Pin'
+                ],
+                'actions'=>[
+                    'buy'=>'Al'
                 ],
             ],
         ],
@@ -180,6 +221,9 @@ return [
         'labels' => [
             'phonenumb' => 'Telefon nömrəsi',
             'password' => 'Şifrə',
+            'oldpassword'=>'Əvvəlki şifrə',
+            'newPassword'=>'Yeni şifrə',
+            'newPassword_repeat'=>'Yeni şifrənin təkrarı',
             'forgotpass' => 'Şifrəmi unutdum',
             'name' => 'Ad',
             'email' => 'E-mail',
@@ -217,13 +261,15 @@ return [
         ],
         'action'=>[
             'removed'=>'Silindi',
-            'added'=>'Əlavə edildi'
+            'added'=>'Əlavə edildi',
+            'logout'=>'Hesabınızdan çıxdınız',
         ],
     ],
     'actions' => [
         'addtocart' => 'Karta əlavə et',
         'more' => 'Daha çox',
-        'shareThis' => 'Adreslərdə paylaş'
+        'shareThis' => 'Adreslərdə paylaş',
+        'null'=>'Məlumat tapılmadı'
     ],
     'auth'=>[
         'notyetacc'=>'Daxil etdiyiniz nömrəyə aid hesab görünmür.',

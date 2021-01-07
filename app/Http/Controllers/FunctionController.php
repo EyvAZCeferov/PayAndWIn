@@ -31,4 +31,14 @@ class FunctionController extends Controller
         }
         return redirect()->route('profile-cards');
     }
+
+    public function logout(){
+        try{
+            Auth::logout();
+            toastr()->success(\Lang::get('static.form.action.logout'));
+        }catch(\Exception $e){
+            toastr()->error(\Lang::get('static.auth.error') . ' ' . $e->getMessage());
+        }
+        return redirect()->route('login');
+    }
 }
