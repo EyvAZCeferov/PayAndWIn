@@ -358,7 +358,7 @@
     }
 </style>
     <div class="cardContainer">
-        
+
             <div class="container cardcard preload">
                 <div class="creditcard">
                     <div class="front">
@@ -466,6 +466,15 @@
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
 
                             </svg>
+                        </div>
+                        <div class="field-container">
+                            <label for="cardtype">
+                                @lang('static.page.shopping.checkout.other.selectcard')
+                            </label>
+                            <select class="form-control" name="card_types" id="cardtype">
+                                <option value="payingcard">@lang('static.page.shopping.checkout.other.payingcards')</option>
+                                <option value="bonuscard">@lang('static.page.shopping.checkout.other.bonuscards')</option>
+                            </select>
                         </div>
                         <div class="field-container">
                             <label for="expirationdate">@lang('static.page.profile.table.columns.expirationDate') (mm/yy)</label>

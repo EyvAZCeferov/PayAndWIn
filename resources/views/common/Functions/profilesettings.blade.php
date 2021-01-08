@@ -117,23 +117,7 @@
                                 <input wire:model="formFields.password.new_password_repeat" type="password" class="form-control" id="pass_new-repeat">
 
                             </div>
-                            <div class="form-group ">
-                                @php($userInfo=json_decode($userinfos->infos))
-                                @if($userInfo->birthday)
-                                    @php($newDate = date("m/d/Y", strtotime($userInfo->birthday)))
-                                @endif
-                                <label for=birthday>@lang('static.page.profile.settings.form.labels.birthday')</label>
-                                <input
-                                wire:model="formFields.birthday"
-                                value="{{ $newDate ? $newDate :null }}"
-                                pattern="\d{2}-\d{2}-\d{4}"
-                                type="date"
-                                class="form-control"
-                                id="birthday"
-                                />
-
-                            </div>
-
+                            
                             <div class="row mt-5">
 
                                 <div class="col">

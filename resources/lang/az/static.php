@@ -6,7 +6,8 @@ return [
         'loginRegister' => [
             'lrTitle' => 'Daxil ol | Qeydiyyatdan keç',
             'login' => 'Daxil ol',
-            'register' => 'Qeydiyyatdan keç'
+            'register' => 'Qeydiyyatdan keç',
+            'forgetPass'=>'Şifrəni bərpa et',
         ],
         'account' => 'Hesabım',
         'home' => 'Ana Səhifə',
@@ -44,6 +45,7 @@ return [
         'loginRegister' => [
             'login' => [
                 'desc' => 'Xoş gəlmişsiniz! Daxil olun!',
+                'thisnumbernotinbase'=>'Nömrəniz bazamızda qeydiyyatda deil.',
             ],
             'register' => [
                 'desc' => 'PW hesabını yarat!',
@@ -53,7 +55,13 @@ return [
             ],
             'verify'=>[
                 'verifyInput'=>'Təsdiq kodunu daxil edin',
-                'verify'=>'Təsdiqlə'
+                'verify'=>'Təsdiqlə',
+                'sendedverify'=>'Təsdiq kodu göndərildi. 5 dəqiqə içərisində kod telefonunuzda olacaqdır.',
+                'verificationsuccess'=>'Verifikasiya təsdiqləndi. Yönləndirilirsiniz...'
+            ],
+            'forgerPass'=>[
+                'describe'=>'Sistemimizdə mövcud nömrənizi daxil edin və yeniləmə kodunu gözləyin.',
+                'newCodeSendMe'=>'Yeniləmə şifrəsini göndər',
             ],
         ],
         '404' => [
@@ -120,6 +128,9 @@ return [
                 'other'=>[
                     'endShopping'=>'Ödənişi təsdiqlə',
                     'cupponCode'=>'Kupon kodu',
+                    'payingcards'=>'Ödəniş kartları',
+                    'bonuscards'=>'Bonus kartları',
+                    'selectcard'=>'Bir kart Seçin',
                 ],
                 'order'=>[
                     'yourOrder'=>'Sizin sifariş',

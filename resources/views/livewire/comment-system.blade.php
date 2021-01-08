@@ -11,15 +11,31 @@
                 <div class="panel-body">
                     <ul class="media-list">
                         @foreach($comments->where('top_comment_id',0) as $comment)
-
+                        @php($message=json_decode($comment->message))
                             <li class="media">
                                 <a class="pull-left" href="javascript:void(0)">
-                                    <i class="fa fa-user fa-4x"></i>
+                                    @if(property_exists($message,'userId'))
+                                        @php($userdata=get_profile_data($message->userId))
+                                        <img
+                                        width="80"
+                                        height="60"
+                                        src="data:image/png;base64,{{ get_image_from_google($userdata->profilePhoto,'users') }}"
+                                        class="d-inline-block img-circle"
+                                        alt="{{ $userdata->name }}" />
+                                    @else
+                                        <i class="fa fa-user fa-4x"></i>
+                                    @endif
                                 </a>
-                                @php($message=json_decode($comment->message))
                                 <div class="media-body">
                                     <div class="text">
-                                        <h3>{{ $message->name }}</h3>
+                                        <h3>
+                                            @if(property_exists($message,'userId'))
+                                                @php($userdata=get_profile_data($message->userId))
+                                                {{ $userdata->name }}
+                                            @else
+                                                {{ $message->name }}
+                                            @endif
+                                        </h3>
                                         <p class="date">
                                             @php($time=$comment->created_at)
                                             @if(\Illuminate\Support\Facades\App::getLocale()=='az')
@@ -48,14 +64,32 @@
                                     <!-- End text -->
                                     @if($comment->get_top_comment)
                                         @foreach($comment->get_top_comment as $children)
+                                        @php($messageTop=json_decode($children->message))
                                             <div class="media">
+
                                                 <a class="pull-left" href="javascript:void(0)">
-                                                    <i class="fa fa-user fa-4x"></i>
+                                                    @if(property_exists($messageTop,'userId'))
+                                                        @php($userdataChild=get_profile_data($messageTop->userId))
+                                                        <img
+                                                        width="80"
+                                                        height="60"
+                                                        src="data:image/png;base64,{{ get_image_from_google($userdataChild->profilePhoto,'users') }}"
+                                                        class="d-inline-block img-circle"
+                                                        alt="{{ $userdataChild->name }}" />
+                                                    @else
+                                                        <i class="fa fa-user fa-4x"></i>
+                                                    @endif
                                                 </a>
-                                                @php($messageTop=json_decode($children->message))
                                                 <div class="media-body">
                                                     <div class="text">
-                                                        <h3>{{ $messageTop->name }}</h3>
+                                                        <h3>
+                                                            @if(property_exists($messageTop,'userId'))
+                                                            @php($userdata=get_profile_data($messageTop->userId))
+                                                                {{ $userdataChild->name }}
+                                                            @else
+                                                                {{ $messageTop->name }}
+                                                            @endif
+                                                        </h3>
                                                         <p class="date">
                                                             @php($time=$children->created_at)
                                                                 @if(\Illuminate\Support\Facades\App::getLocale()=='az')
@@ -95,7 +129,17 @@
         <div id="replyUser" class="{{ $replyData['active'] ? null : 'hidden' }}" >
             <div class="media">
                 <a class="pull-left" href="javascript:void(0)">
-                    <i class="fa fa-user fa-4x"></i>
+                    @if($replyData['userId'] !=null || $replyData['userId'])
+                        @php($userdata=get_profile_data($replyData['userId']))
+                        <img
+                        width="80"
+                        height="60"
+                        src="data:image/png;base64,{{ get_image_from_google($userdata->profilePhoto,'users') }}"
+                        class="d-inline-block img-circle"
+                        alt="{{ $userdata->name }}" />
+                    @else
+                        <i class="fa fa-user fa-4x"></i>
+                    @endif
                 </a>
                 <div class="media-body">
                     <div class="text">
@@ -108,7 +152,7 @@
                 <!-- Nested media object -->
             </div>
         </div>
-        <form class="form-horizontal" wire:submit.prevent="sendComment">
+        <form class=" submitable form-horizontal" wire:submit.prevent="sendComment">
             <div id="reply"></div>
             <h3>@lang('static.page.customers.customer.addComment')</h3>
             @if (session()->has('message'))

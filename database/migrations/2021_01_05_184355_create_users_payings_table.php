@@ -18,6 +18,7 @@ class CreateUsersPayingsTable extends Migration
             $table->text('pay_id');
             $table->text('uid');
             $table->longText('payInfo');
+            $table->text('type');
             $table->timestamps();
             $table->softDeletes();
         });

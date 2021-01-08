@@ -15,7 +15,16 @@ class RatingSystem extends Component
 
     public function mount($table,$postid){
         $this->postid=$postid;
-        $this->rating= Ratings::where('tablename',$table)->where('ratingable_id',$postid)->first();
+        $allRatings = Ratings::where('tablename',$table)->where('ratingable_id',$postid)->get();
+        $this->getRating($allRatings);
+    }
+
+    public function getRating($allRatings){
+        $ratingnumb=0;
+        foreach($allRatings as $rating){
+            $ratingnumb += intval($rating->rating);
+        }
+        $this->rating=$ratingnumb;
     }
 
     public function updated(){
@@ -26,7 +35,7 @@ class RatingSystem extends Component
                         'rating'=>$i,
                         'ratingable_id'=>$this->postid,
                         'author_type'=>'user',
-                        'author_id'=>4,
+                        'author_id'=>Auth::user()->id,
                         'tablename'=>'customers',
                     ]);
                 }

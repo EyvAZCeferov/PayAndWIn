@@ -47,12 +47,35 @@
                                 @endif</a>
                         </h3>
 
-                        <p class="post-by"><span> @lang('static.menu.shops')</span> &nbsp; <i
-                                class="fa fa-map fa-1x"></i> {{ $customer->get_locations()->count() }}</span></p>
-                        <p class="post-by"><span> @lang('static.menu.campaigns')</span> &nbsp; <i
-                                class="fa fa-list-ul fa-1x"></i> {{ $customer->get_posts()->count() }}</span></p>
-                        <p class="post-by"><span> @lang('static.menu.products')</span> &nbsp; <i
-                                class="fa fa-map fa-1x"></i> 0</span></p>
+                        <p class="post-by">
+                            <a href="{{ route('customerLocationsBrowse', $customer->id) }}" >
+                                 <span>  
+                                     @lang('static.menu.shops')
+                                  &nbsp; 
+                                 <i
+                                class="fa fa-map fa-1x"></i> 
+                                {{ $customer->get_locations()->count() }}
+                            </span>
+                            </a>
+                        </p>
+                        <p class="post-by">
+                            <a href="{{ route('customerCampaigns', $customer->id) }}" >
+                            <span> @lang('static.menu.campaigns')
+                             &nbsp; <i
+                                class="fa fa-list-ul fa-1x"></i> 
+                                {{ $customer->get_posts()->count() }}
+                            </span>
+                            </a>
+                        </p>
+                        <p class="post-by">
+                            <a href="{{ route('products', $customer->id) }}" >
+                                <span> 
+                                @lang('static.menu.products') &nbsp; 
+                                <i
+                                    class="fa fa-map fa-1x"></i>
+                                    0</span>
+                            </a>
+                            </p>
                         <a class="link-v1 color-brand" href="{{ route('customer',$customer->id) }}"
                            title="@lang('static.actions.more')">@lang('static.actions.more')</a>
                     </div>

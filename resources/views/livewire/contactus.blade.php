@@ -8,13 +8,27 @@
             $('#topSubject').hide();
         })
     </script>
-<style type="text/css">
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-    #map {
-        width: 100%;
-        height: 500px;
-    }
+    <script>
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        }
+
+        function showPosition(position) {
+            const latlng={'lat':position.coords.latitude,'lng':position.coords.longitude};
+            return latlng;
+        }
+    </script>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            width: 100%;
+            height: 500px;
+        }
   </style>
 @endsection
 @section('js')
@@ -24,21 +38,30 @@
     defer
     ></script>
     <script>
+    let map, infoWindow,myLatLng;
       function initMap() {
-        const myLatLng={'lat':{{ env('GOOGLE_MAPS_DEFAULT_CENTER_LAT') }},'lng':{{ env('GOOGLE_MAPS_DEFAULT_CENTER_LNG') }}};
-        const map = new google.maps.Map(document.getElementById("map"), {
+        datas=getLocation();
+        if(datas){
+            myLatLng=datas;
+        }else{
+            myLatLng={'lat':{{ env('GOOGLE_MAPS_DEFAULT_CENTER_LAT') }},'lng':{{ env('GOOGLE_MAPS_DEFAULT_CENTER_LNG') }}};
+        }
+        map = new google.maps.Map(document.getElementById("map"), {
         zoom: {{ env('GOOGLE_MAPS_DEFAULT_ZOOM') }},
         center: myLatLng,
+        mapTypeId: 'satellite'
         });
-        var infowindow = new google.maps.InfoWindow();
+        infowindow = new google.maps.InfoWindow();
+
         @foreach($locations as $location)
-        @php($geometry=json_decode($location->geometry))
-        var data={lat:{{$geometry->latitude }},lng:{{ $geometry->longitude }}};
-            addMarker(data,'{{ $location->get_customer->az_name }}',map);
-            google.maps.event.addListener(map, "click", (event) => {
+            @php($geometry=json_decode($location->geometry))
+            var data={lat:{{$geometry->latitude }},lng:{{ $geometry->longitude }}};
                 addMarker(data,'{{ $location->get_customer->az_name }}',map);
-        });
+                google.maps.event.addListener(map, "click", (event) => {
+                    addMarker(data,'{{ $location->get_customer->az_name }}',map);
+            });
         @endforeach
+
       }
       function addMarker(location,label, map) {
         new google.maps.Marker({
@@ -46,9 +69,9 @@
           label: label,
           map: map,
         });
-
       }
-    </script>
+
+</script>
 @endsection
 <div>
     <div class="container">
@@ -100,6 +123,7 @@
                     </div>
                 @endif
                 <form class="submitable" class="form-horizontal space-50" wire:submit.prevent="sendMessage">
+
                     <div class="form-group col-md-6">
                         <input type="text" placeholder="@lang('static.form.labels.name')*"
                                class="form-control" wire:model="formFields.name"/>

@@ -2,14 +2,14 @@
 @lang('static.menu.products')
 @endsection
 @section('css')
-<link 
-rel="stylesheet" 
-type="text/css" 
-href="{{asset('assets/libs/vendor/range-price.css')}}" 
+<link
+rel="stylesheet"
+type="text/css"
+href="{{asset('assets/libs/vendor/range-price.css')}}"
 />
 @endsection
 <div class="container">
-    <div id="primary" class="col-xs-12 col-md-9">  
+    <div id="primary" class="col-xs-12 col-md-9">
             <div class="wrap-breadcrumb">
                 <div class="ordering">
                     <div class="float-left">
@@ -31,42 +31,15 @@ href="{{asset('assets/libs/vendor/range-price.css')}}"
                 </div>
             </div>
             <div class="products ver2 grid_full grid_sidebar hover-shadow furniture">
-                    <div class="item-inner">
-                        <div class="product">
-                            <div class="product-images">
-                                <a href="#" title="product-images">
-                                    <img class="primary_image" src="{{ asset('assets/libs/images/products/1.jpg') }}" alt=""/>
-                                    <img class="secondary_image" src="{{ asset('assets/libs/images/products/1.jpg')}}" alt=""/>
-                                </a>
-                            </div>
-                            <a href="#" title="Bouble Fabric Blazer"><p class="product-title">Bouble Fabric Blazer</p></a>
-                            <p class="product-price-old">$700.00</p>
-                            <p class="product-price">$69.90</p>
-                            <p class="description">Dramatically transition excellent information rather than mission-critical results. Competently communicate fully tested core competencies through holistic resources. Professionally maintain high-payoff best practices whereas user-centric alignments. Intrinsicly engage future-proof best practices whereas economically sound resources. Holisticly maximize multidisciplinary synergy before magnetice-tailers.</p>
-                            <div class="action">
-                                    <a class="add-cart" href="#" title="Add to cart"></a>
-                                    <a class="wish" href="#" title="Wishlist"></a>
-                                    <a class="zoom" onclick="quick()" title="Quick view"></a>
-                                </div>
-                                <!-- End action -->
-                            <div class="social box">
-                                <h3>@lang('static.actions.shareThis') :</h3>
-                                <a class="twitter" href="#" title="social"><i class="fab fa-twitter-square"></i></a>
-                                <a class="dribbble" href="#" title="social"><i class="fab fa-dribbble"></i></a>
-                                <a class="skype" href="#" title="social"><i class="fab fa-skype"></i></a>
-                                <a class="pinterest" href="#" title="social"><i class="fab fa-pinterest"></i></a>
-                                <a class="facebook" href="#" title="social"><i class="fab fa-facebook-square"></i></a>
-                            </div>
-                        </div>
-                        <!-- End product -->
-                    </div>
-                    
+
+                @livewire('product-foreach', ['data' => [1,2,3,4,5],'table'=>'products'])
+
             </div>
             <!-- End product-content products  -->
-            
+
         </div>
         <!-- End Primary -->
-        
+
     <div id="secondary" class="widget-area col-xs-12 col-md-3">
         <aside class="widget widget_product_categories">
             <h3 class="widget-title">@lang('static.menu.categories')</h3>
@@ -156,7 +129,7 @@ href="{{asset('assets/libs/vendor/range-price.css')}}"
            <div id="quickview-content">
               <div class="woocommerce product product-details-content">
                  <div class="product-images">
-                    <div class="main-image images"><img id="images-select" alt="" 
+                    <div class="main-image images"><img id="images-select" alt=""
                         src="{{ asset('assets/libs/images/products/1.jpg') }}"></div>
                     <div class="quick-thumbnails">
                        <ul class="thumb-content">
@@ -173,16 +146,16 @@ href="{{asset('assets/libs/vendor/range-price.css')}}"
                     </div>
                     <div class="rating">
                          <div class="overflow-h">
-                             <div class="icon-rating">  
-                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-1">    
-                                 <label for="star-horizontal-rating-1"><i class="fa fa-star-half-o"></i></label> 
-                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-2">    
+                             <div class="icon-rating">
+                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-1">
+                                 <label for="star-horizontal-rating-1"><i class="fa fa-star-half-o"></i></label>
+                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-2">
                                  <label for="star-horizontal-rating-2"><i class="fa fa-star"></i></label>
-                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-3">    
+                                 <input type="radio" checked="" name="star-horizontal-rating" id="star-horizontal-rating-3">
                                  <label for="star-horizontal-rating-3"><i class="fa fa-star"></i></label>
-                                 <input type="radio" name="star-horizontal-rating" id="star-horizontal-rating-4">    
+                                 <input type="radio" name="star-horizontal-rating" id="star-horizontal-rating-4">
                                  <label for="star-horizontal-rating-4"><i class="fa fa-star"></i></label>
-                                 <input type="radio" name="star-horizontal-rating" id="star-horizontal-rating-5">    
+                                 <input type="radio" name="star-horizontal-rating" id="star-horizontal-rating-5">
                                  <label for="star-horizontal-rating-5"><i class="fa fa-star"></i></label>
                              </div>
                              <span>(4 reviews)</span>
@@ -227,10 +200,10 @@ href="{{asset('assets/libs/vendor/range-price.css')}}"
 
 @section('js')
     <script type="text/javascript" src="{{ asset('assets/libs/js/jquery.themepunch.plugins.min.js') }}"></script>
-<script type="text/javascript" 
+<script type="text/javascript"
 src="{{ asset('/assets/libs/js/price-range.js') }}"></script>
     <script type="text/javascript">
-      jQuery("#Slider1").slider({ 
+      jQuery("#Slider1").slider({
         from: 0,
         to: 100,
         step: 1,

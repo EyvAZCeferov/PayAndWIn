@@ -23,7 +23,6 @@ class ProfileSettings extends Component
             'new_password_repeat'=>null,
         ],
         'email'=>null,
-        'birthday'=>null,
     ],$userinfos=null;
 
     public function mount(){
@@ -58,22 +57,6 @@ class ProfileSettings extends Component
                 } else {
                     session()->flash('message', 'Daxil etdiyiniz şifrə yanlışdır!');
                     return redirect('/login');
-                }
-            }
-            if(array_key_exists('birthday',$this->formFields)){
-                $infos=[
-                    'birthday'=>$this->formFields['birthday']
-                ];
-                $ifDat=UserInfos::where('uid',Auth::user()->uid)->first();
-                if($ifDat->count()>0 || $ifDat !=null){
-                    UserInfos::where('uid',Auth::user()->uid)->update([
-                        'infos'=>json_encode($infos),
-                    ]);
-                }else{
-                    UserInfos::create([
-                        'uid'=>Auth::user()->uid,
-                        'infos'=>json_encode($infos),
-                    ]);
                 }
             }
             User::where('id',Auth::user()->id)->update([

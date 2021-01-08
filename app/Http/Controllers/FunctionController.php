@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\UserCards;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Kreait\Firebase\Factory;
+
 
 class FunctionController extends Controller
 {
@@ -19,12 +21,23 @@ class FunctionController extends Controller
              'password'=>$request->password,
              'price'=>0,
             ];
+            $cardId=Str::random(15);
             UserCards::create([
                  'uid'=>Auth::user()->uid,
-                 'cardId'=>Str::random(15),
+                 'cardId'=>$cardId,
                  'cardInfos'=>json_encode($cardInfo),
-                 'type'=>$request->card_type,
+                 'type'=>$request->card_types,
             ]);
+            $factory = (new Factory)->withServiceAccount(app_path() . '/Firebase/FirebaseConfig.json')->createDatabase();
+            $ref = $factory->getReference('users/' . Auth::user()->uid . '/cards/');
+            $ref->getChild($cardId)->set(
+                [
+                    'cardId' => $cardId,
+                    'uid'=>Auth::user()->uid,
+                    'cardInfos'=>json_encode($cardInfo),
+                    'type'=>$request->card_types,
+                ]
+            );
             toastr()->success(\Lang::get('static.form.action.added'));
         }catch(\Exception $e){
             toastr()->error(\Lang::get('static.auth.error') . ' ' . $e->getMessage());

@@ -14,6 +14,7 @@ class UsersPaying extends Model
     protected $fillable=[
         'pay_id',
         'uid',
+        'type',
         'payInfo',
     ];
     public function get_product_items(){

@@ -166,22 +166,7 @@
                     @endif</p>
                 <!--End Description-->
 
-                <div class="social box">
-                    <h3>@lang('static.actions.shareThis') :</h3>&nbsp;
-                    <a
-                        class="facebook"
-                        href="javascript:void(0)"
-                    ><i class="fab fa-2x fa-facebook-square"></i></a>&nbsp;
-                    <a class="twitter"
-                       href="{{route('share',['platform'=>'twitter','table'=>'customer','content_id'=>$customer[0]->id])}}"><i
-                            class="fab fa-2x fa-twitter-square"></i></a>&nbsp;
-                    <a class="whatsapp"
-                       href="{{route('share',['platform'=>'whatsapp','table'=>'customer','content_id'=>$customer[0]->id])}}"><i
-                            class="fab fa-2x fa-whatsapp"></i></a>&nbsp;
-                    <a class="linkedin"
-                       href="{{route('share',['platform'=>'linkedin','table'=>'customer','content_id'=>$customer[0]->id])}}"><i
-                            class="fab fa-2x fa-linkedin"></i></a>&nbsp;
-                </div>
+                @include('common.Functions.sharebutton',['image'=>get_image_url($ims[0],'locations',$customer[0]->get_locations->clasor),'title'=>$customer[0]->az_name])
                 <!-- End share -->
             </div>
             <!-- End Options -->

@@ -5,6 +5,9 @@ use App\Models\Customers;
 use App\Models\UserCards;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 
 function settings($fieldname)
 {
@@ -66,3 +69,36 @@ function get_image_from_google($imageName,$clasor=null){
         return null;
     }
 }
+
+function get_image_url($imageName,$folder, $thisFolder = null){
+    $setting = Settings::where('id', 1)->get();
+    if ($thisFolder == null) {
+        $imageUrl = $setting[0]->adminUrl . '/storage/uploads/' . $folder . '/' . $imageName;
+    } else {
+        $imageUrl = $setting[0]->adminUrl . '/storage/uploads/' . $folder . '/' . $thisFolder . '/' . $imageName;
+    }
+    if($imageUrl){
+        return $imageUrl;
+    }else{
+        return null;
+    }
+}
+
+function get_profile_data($ui)
+{
+    $user=User::where('uid',$ui)->first();
+    return $user;
+}
+
+function getcartlist(){
+    return Cart::instance('sopping')->content();
+}
+
+function getwishlist(){
+    return Cart::instance('wishlist')->content();
+}
+
+
+
+
+

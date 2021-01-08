@@ -4,7 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Nexmo;
-use App\Models\User;
+use App\User;
+use App\Models\UserCards;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -93,16 +94,7 @@ class Login extends Component
         try{
             $verification = new \Nexmo\Verify\Verification($this->formFields['verify']['nexmo_request_id']);
             Nexmo::verify()->check($verification, $this->formFields['verify']['verifyCode']);
-            User::create([
-                'profilePhoto'=>null,
-                'role'=>0,
-                'customer_id'=>0,
-                'name'=>'Name',
-                'email'=>null,
-                'phoneNumber'=>$this->formFields['register']['phoneNumb'],
-                'password'=>Hash::make($this->formFields['register']['password']),
-                'uid'=>Str::random(40),
-            ]);
+            $this->createUserData();
             Auth::attempt([
                 'phoneNumber' => $this->formFields['register']['phoneNumb'],
                 'password' => Hash::make($this->formFields['register']['password'])
@@ -112,6 +104,71 @@ class Login extends Component
             return redirect('/');
         }catch(\Exception $e){
             session()->flash('message', \Lang::get('static.auth.error') . ' ' . $e->getMessage());
+        }
+    }
+
+    public function createUserData(){
+        $uid=Str::random(40);
+        User::create([
+            'profilePhoto'=>null,
+            'role'=>0,
+            'customer_id'=>0,
+            'name'=>'Name',
+            'email'=>null,
+            'phoneNumber'=>$this->formFields['register']['phoneNumb'],
+            'password'=>Hash::make($this->formFields['register']['password']),
+            'uid'=>$uid,
+        ]);
+        $factory = (new Factory)->withServiceAccount(app_path() . '/Firebase/FirebaseConfig.json')->createDatabase();
+        $ref = $factory->getReference('users/'.$uid.'/userInfos');
+        $ref->set(
+            [
+                'profilePhoto'=>null,
+                'name'=>'Name',
+                'email'=>null,
+                'phoneNumber'=>$this->formFields['register']['phoneNumb'],
+                'password'=>Hash::make($this->formFields['register']['password']),
+                'uid'=>$uid,
+            ]
+        );
+        $this->checkPin($uid);
+    }
+
+    public function makePinNumb(){
+        $code = '111';
+        for($i = 0; $i < 13; $i++) { $code .= mt_rand(0, 9); }
+        return $code;
+    }
+
+    public function checkPin($uid){
+        $pin=UserCards::where('uid',$uid)->where('type','pin')->first();
+        if(!$pin || $pin->count()==0 || $pin==null){
+            $number=$this->makePinNumb();
+            $cardInfo=[
+                'number'=>$number,
+                'cvc'=>rand(101,999),
+                'type'=>'pin',
+                'expiry'=>'∞/∞',
+                'password'=>null,
+                'price'=>0,
+            ];
+            $cardId=Str::random(20);
+            UserCards::create([
+                'uid'=>$uid,
+                'cardId'=>$cardId,
+                'cardInfos'=>json_encode($cardInfo),
+                'type'=>'pin',
+            ]);
+            $factory = (new Factory)->withServiceAccount(app_path() . '/Firebase/FirebaseConfig.json')->createDatabase();
+            $ref = $factory->getReference('users/'.$uid.'/pin/'.$cardId);
+            $ref->set(
+                [
+                    'uid'=>$uid,
+                    'cardId'=>$cardId,
+                    'cardInfos'=>json_encode($cardInfo),
+                    'type'=>'pin',
+                ]
+            );
         }
     }
 

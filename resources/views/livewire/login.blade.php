@@ -73,7 +73,7 @@
                         <input id="remeber" wire:model="formFields.login.remember" type="checkbox" name="check"
                                value="remeber" checked="on"/>
                         <label for="remeber" class="label-check">@lang('static.form.inputs.rememberme')</label>
-                        <a class="help" href="javascript:void(0)">@lang('static.form.labels.forgotpass')?</a>
+                        <a class="help" href="{{ route('forgetpass') }}">@lang('static.form.labels.forgotpass')?</a>
                     </div>
                     <button type="submit" class="link-v1 rt">@lang('static.menu.loginRegister.login')</button>
                 </form>

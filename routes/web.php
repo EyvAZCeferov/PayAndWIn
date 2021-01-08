@@ -5,7 +5,11 @@ use App\Http\Controllers\BaseController;
 
 Route::group(['prefix' => '/'], function () {
     Route::livewire('/', 'index')->name('index');
-    Route::livewire('login', 'login')->name('login')->middleware('guest');
+    Route::group(['prefix' => 'useraction'], function () {
+        Route::livewire('login', 'login')->name('login')->middleware('guest');
+        Route::livewire('forgetpassword', 'forgetpass')->name('forgetpass')->middleware('guest');
+        Route::livewire('change_new_pass', 'change-new-pass')->name('change_new_pass')->middleware('guest');
+    });
     Route::livewire('contactus', 'contactus')->name('contactus');
     Route::livewire('aboutus', 'aboutus')->name('aboutus');
     Route::livewire('faq', 'faq')->name('faq');
