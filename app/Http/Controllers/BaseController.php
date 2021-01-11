@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Jorenvh\Share\Share;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\EmailLists;
 use Jenssegers\Agent\Agent;
 
@@ -22,7 +22,7 @@ class BaseController extends Controller
     {
         App::setLocale($locale);
         Session::put('localization', $locale);
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function notFound()

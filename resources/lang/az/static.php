@@ -213,6 +213,9 @@ return [
                 ],
             ],
         ],
+        'termofuse'=>[
+            'termusedescb'=>'İstifadə şərtləri sizin güvənliyiniz, maraqlarınızı qoruyur.'
+        ],
     ],
     'standart' => [
         'topPanel' => [
