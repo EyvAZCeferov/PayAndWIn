@@ -59,8 +59,11 @@ class ProfileSettings extends Component
                     return redirect('/login');
                 }
             }
-            User::where('id',Auth::user()->id)->update([
+            $userInfo=[
                 'email'=>$this->formFields['email'],
+            ];
+            UserInfos::where('uid',Auth::user()->uid)->update([
+                'infos'=>json_encode($userInfo),
             ]);
             session()->flash('message', 'Ugurlu');
         }catch(\Exception $e){

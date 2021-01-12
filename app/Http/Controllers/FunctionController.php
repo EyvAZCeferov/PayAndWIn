@@ -21,7 +21,7 @@ class FunctionController extends Controller
              'password'=>$request->password,
              'price'=>0,
             ];
-            $cardId=Str::random(15);
+            $cardId=Str::random(50);
             UserCards::create([
                  'uid'=>Auth::user()->uid,
                  'cardId'=>$cardId,

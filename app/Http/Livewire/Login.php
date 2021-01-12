@@ -9,6 +9,7 @@ use App\Models\UserCards;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Kreait\Firebase\Factory;
 
 class Login extends Component
 {
@@ -111,8 +112,6 @@ class Login extends Component
         $uid=Str::random(40);
         User::create([
             'profilePhoto'=>null,
-            'role'=>0,
-            'customer_id'=>0,
             'name'=>'Name',
             'email'=>null,
             'phoneNumber'=>$this->formFields['register']['phoneNumb'],
