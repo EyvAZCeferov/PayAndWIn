@@ -97,11 +97,13 @@
                             @lang('static.page.shopping.cartlist.other.clearCart')
                         </a>
                     </div>
+                    @auth
                     <!-- End float left -->
                     <div class="float-right">
                         <a class="link-v1 lh-50 bg-brand" href="{{ route('checkout') }}" title="@lang('static.page.shopping.cartlist.other.continueCart')">@lang('static.page.shopping.cartlist.other.continueCart')</a>
                     </div>
                     <!-- End float-right -->
+                    @endauth
                 </div>
                 <!-- End box -->
         </div>

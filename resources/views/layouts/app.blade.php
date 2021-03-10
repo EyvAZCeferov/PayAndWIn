@@ -190,11 +190,13 @@
                                                 class="left">@lang('static.page.shopping.cartlist.tableheader.total'):</span>
                                             <span class="right">$1121.98</span>
                                         </p>
-                                        <div class="bottom">
+                                        <div class="bottom" >
                                             <a class="link-v1" href="{{ route('cartlist') }}"
                                                 title="@lang('static.page.index.showCartList')">@lang('static.page.index.showCartList')</a>
-                                            <a class="link-v1 rt" href="{{ route('checkout') }}"
-                                                title="@lang('static.menu.shopping.checkout')">@lang('static.menu.shopping.checkout')</a>
+                                            @auth
+                                                <a class="link-v1 rt" href="{{ route('checkout') }}"
+                                                    title="@lang('static.menu.shopping.checkout')">@lang('static.menu.shopping.checkout')</a>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>
